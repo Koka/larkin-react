@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'app', to: 'app#index'
   get '/', to: redirect('/app')
   post 'knock/auth_token', to: 'user_token#create'
 
