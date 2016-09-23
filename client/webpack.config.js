@@ -15,6 +15,7 @@ const config = {
   output: {
     filename: 'webpack-bundle.js',
     path: '../app/assets/webpack',
+    publicPath: '/assets/'
   },
 
   resolve: {
@@ -42,6 +43,9 @@ const config = {
         loader: 'babel-loader',
         exclude: /node_modules/,
       },
+      { test: /\.(jpg|png|gif|ico)$/, loader: "file-loader?name=[name].[ext]" },
+      { test: /\.css$/, loader: "style-loader!css-loader" },
+      { test: /\.(woff(2)?|ttf|eot|svg)$/, loader: "file-loader?name=[name].[ext]" }
     ],
   },
 };

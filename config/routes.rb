@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
-  get 'app', to: 'app#index'
-  get '/', to: redirect('/app')
+  get '/app', to: 'app#index'
+  get '/app/*route', to: 'app#index'
+  get '/', to: redirect('/app/')
+  
   post 'knock/auth_token', to: 'user_token#create'
 
   resources :users, only: [:show] do

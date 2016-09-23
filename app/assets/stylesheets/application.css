@@ -13,3 +13,130 @@
  *= require_tree .
  *= require_self
  */
+
+.larkin-container {
+  height: 100%;
+}
+
+div[data-reactroot] {
+  height: 100%;
+}
+
+ .unauthorized {
+   height : 100%;
+   background-color: #EAEAEA;
+ }
+
+ .unauthorized .ui.grid {
+   height : 100%;
+   margin: 0;
+ }
+
+ .unauthorized .column {
+   max-width: 800px;
+ }
+
+ .login {
+   height : 100%;
+   background-color: #EAEAEA;
+ }
+
+ .login .ui.grid {
+   height : 100%;
+   margin: 0;
+ }
+
+ .login .column {
+   max-width: 450px;
+ }
+
+ .login .demo-users {
+   text-align: left;
+   display: inline-block;
+ }
+
+ .force-pointer {
+   cursor: pointer;
+ }
+
+ .load-plan-not-available {
+   text-align: center;
+   color: gray;
+ }
+
+ .ui.list.load-plan-list {
+   margin-top: 1.5em;
+   margin-left: 2em;
+   margin-bottom: 3em;
+   min-height: 5em;
+ }
+
+ .ui.list.load-plan-list > .item > .icon {
+   display: inline-block;
+   padding: 0;
+ }
+
+ .load-plan-force-bottom {
+   position: absolute;
+   bottom: 1em;
+ }
+
+ .noselect {
+   -webkit-touch-callout: none; /* iOS Safari */
+   -webkit-user-select: none;   /* Chrome/Safari/Opera */
+   -khtml-user-select: none;    /* Konqueror */
+   -moz-user-select: none;      /* Firefox */
+   -ms-user-select: none;
+   user-select: none;
+ }
+
+ .ui.table td.empty-table-message {
+   text-align: center;
+ }
+
+ .ui.modal > .content > div.description.full-width {
+   width: 100%;
+ }
+
+ .ui.input.error input {
+     background-color: #FFF6F6;
+     border-color: #E0B4B4;
+     color: #9F3A38;
+     box-shadow: none;
+ }
+
+ .ui.label.error-label {
+   position: absolute;
+   left: 30%;
+   top: 32px;
+ }
+
+ .confirm-wrap {
+   display: inline-block;
+   position: relative;
+ }
+
+ .ui.label.confirm-label {
+   position: absolute;
+   left: -50px;
+   top: 30px;
+   width: 140px;
+   z-index: 10;
+ }
+
+ .pagination-centered {
+   margin-top: 1em;
+   text-align: center;
+ }
+
+ .load-header {
+   max-width: 180px;
+ }
+
+ .ui.table td.buttons-cell {
+   text-align: center;
+ }
+
+ .ui.left {
+   float: inherit;
+ }
