@@ -4,6 +4,9 @@
 import mirrorCreator from 'mirror-creator';
 
 const actionTypes = mirrorCreator([
+  'AUTH_SET_LOGIN',
+  'AUTH_SET_PASSWORD',
+  'AUTH_DO_LOGIN'
 ]);
 
 // actionTypes = {HELLO_WORLD_NAME_UPDATE: "HELLO_WORLD_NAME_UPDATE"}

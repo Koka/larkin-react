@@ -12,18 +12,17 @@ import { initialStates } from '../reducers';
 export default props => {
   // This is how we get initial props Rails into redux.
   //const { name } = props;
-  const { $$larkinState } = initialStates;
+  const { larkinState } = initialStates;
 
   // Redux expects to initialize the store using an Object, not an Immutable.Map
   const initialState = {
-    $$larkinStore: $$larkinState.merge({
-
-    }),
+    larkinStore: larkinState
   };
 
   const reducer = combineReducers(reducers);
   const composedStore = compose(
-    applyMiddleware(thunkMiddleware)
+    applyMiddleware(thunkMiddleware),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
   );
   const storeCreator = composedStore(createStore);
   const store = storeCreator(reducer, initialState);

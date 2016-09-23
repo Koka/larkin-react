@@ -3,7 +3,7 @@ import ReactOnRails from 'react-on-rails';
 import { Provider } from 'react-redux';
 
 import createStore from '../store/larkinStore';
-import Larkin from '../containers/Larkin';
+import Larkin from '../components/Larkin';
 
 import 'semantic-ui-css/semantic.min.css';
 

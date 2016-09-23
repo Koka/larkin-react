@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { setLogin, setPassword } from '../actions/larkinActionCreators';
 
-export default (props) => {
+const Login = (props) => {
   return (
     <div className="login">
       <div className="ui middle aligned center aligned grid">
@@ -15,13 +17,13 @@ export default (props) => {
               <div className="field">
                 <div className="ui left icon input">
                   <i className="user icon"></i>
-                  <input type="text" name="login" placeholder="Login"/>
+                  <input type="text" name="login" placeholder="Login" value={props.login} onChange={(e) => props.setLogin(e.target.value)}/>
                 </div>
               </div>
               <div className="field">
                 <div className="ui left icon input">
                   <i className="lock icon"></i>
-                  <input type="password" name="password" placeholder="Password"/>
+                  <input type="password" name="password" placeholder="Password" value={props.password} onChange={(e) => props.setPassword(e.target.value)}/>
                 </div>
               </div>
               <button type="submit" className="ui fluid large teal submit button">Login</button>
@@ -51,3 +53,25 @@ export default (props) => {
     </div>
   );
 }
+
+const mapStateToProps = ({ larkinStore }) => {
+  return {
+    login: larkinStore.auth.login,
+    password: larkinStore.auth.password,
+    errorMessage: larkinStore.auth.error,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setLogin: (value) => {
+      dispatch(setLogin(value))
+    },
+
+    setPassword: (value) => {
+      dispatch(setPassword(value))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
