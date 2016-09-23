@@ -1,4 +1,6 @@
 import { compose, createStore, applyMiddleware, combineReducers } from 'redux';
+import { routerMiddleware } from 'react-router-redux';
+import { browserHistory } from 'react-router';
 
 // See
 // https://github.com/gaearon/redux-thunk and http://redux.js.org/docs/advanced/AsyncActions.html
@@ -22,6 +24,7 @@ export default props => {
   const reducer = combineReducers(reducers);
   const composedStore = compose(
     applyMiddleware(thunkMiddleware),
+    applyMiddleware(routerMiddleware(browserHistory)),
     window.devToolsExtension ? window.devToolsExtension() : f => f
   );
   const storeCreator = composedStore(createStore);

@@ -1,11 +1,11 @@
 import actionTypes from '../constants/larkinConstants';
-import api from '../api/api';
 
 export const initialState = {
   auth: {
     login: "",
     password: "",
-    error: ""
+    error: "",
+    token: null
   }
 };
 
@@ -21,9 +21,17 @@ export default function larkinReducer(state = initialState, action) {
       return Object.assign({}, state, {
         auth: Object.assign({}, state.auth, {password: payload})
       });
-    case actionTypes.AUTH_DO_LOGIN:
-      //TODO:
+    case actionTypes.AUTH_LOGIN_OK:
+      return Object.assign({}, state, {
+        auth: Object.assign({}, state.auth, {token: payload})
+      });
+    case actionTypes.AUTH_LOGIN_ERR:
+      console.error("Failed to login", state.payload);
       return state;
+    case actionTypes.AUTH_LOGOUT:
+      return Object.assign({}, state, {
+        auth: Object.assign({}, state.auth, {token: null})
+      });
     default:
       return state;
   }

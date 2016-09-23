@@ -6,7 +6,10 @@ import mirrorCreator from 'mirror-creator';
 const actionTypes = mirrorCreator([
   'AUTH_SET_LOGIN',
   'AUTH_SET_PASSWORD',
-  'AUTH_DO_LOGIN'
+
+  'AUTH_LOGIN_OK',
+  'AUTH_LOGIN_ERR',
+  'AUTH_LOGOUT'
 ]);
 
 // actionTypes = {HELLO_WORLD_NAME_UPDATE: "HELLO_WORLD_NAME_UPDATE"}

@@ -1,4 +1,4 @@
-export function isAuthenticated() {
+export function isAuthenticated(token) {
   return fetch("/users/me")
     .then(me => me.ok)
     .catch(err => {
@@ -7,10 +7,14 @@ export function isAuthenticated() {
     });
 }
 
-export function isUnauthenticated() {
-  return isAuthenticated().then(bool => !bool);
+export function isUnauthenticated(token) {
+  return isAuthenticated(token).then(bool => !bool);
 }
 
-export function login(login, password) {
-  console.log(`LOGIN NOT IMPLEMENTED ${login} ${password}`)
+export function getAuthToken(login, password) {
+  return fetch('/knock/auth_token', {
+    method: 'POST',
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify({auth: { login, password }})
+  }).then(rs => rs.json().then(json => json.jwt), err => err);
 }
