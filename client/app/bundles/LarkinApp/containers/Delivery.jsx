@@ -15,7 +15,26 @@ class Delivery extends React.Component {
     }
   }
 
+  ifRole(role, jsx) {
+    if (this.props.role === role) {
+      return jsx;
+    } else {
+      return null;
+    }
+  }
+
   render() {
+    /*TODO: dynamic redirect
+        console.log(this.props.location);
+        console.log(this.props.role);
+        if (this.props.location.pathname === '/app/delivery') {
+          if (this.props.role === 'dispatcher') {
+            this.props.redirectTo("/app/delivery/orders");
+          } else if (this.props.role === 'driver') {
+            this.props.redirectTo("/app/delivery/routelists");
+          }
+        }*/
+
     return (
       <div className="ui container">
         <nav className="ui stackable menu">
@@ -23,9 +42,9 @@ class Delivery extends React.Component {
             <h4>Larkin LLC Delivery (React edition)</h4>
           </div>
 
-          <Link to="/app/delivery/orders" className="blue item nav-orders"><h4>Orders</h4></Link>
-          <Link to="/app/delivery/loads" className="blue item nav-loads"><h4>Loads</h4></Link>
-          <Link to="/app/delivery/routelists" className="brown item nav-routelists"><h4>Route Lists</h4></Link>
+          {this.ifRole('dispatcher', <Link to="/app/delivery/orders" activeClassName="active" className="blue item nav-orders"><h4>Orders</h4></Link>)}
+          {this.ifRole('dispatcher', <Link to="/app/delivery/loads" activeClassName="active" className="green item nav-loads"><h4>Loads</h4></Link>)}
+          <Link to="/app/delivery/routelists" activeClassName="active" className="brown item nav-routelists"><h4>Route Lists</h4></Link>
 
           <div className="right stacked menu">
             <div className="item">
@@ -43,7 +62,8 @@ class Delivery extends React.Component {
 const mapStateToProps = ({ larkinStore }) => {
   return {
     token: larkinStore.auth.token,
-    currentUserName: larkinStore.users["me"] ? larkinStore.users["me"].name : "Unknown"
+    currentUserName: larkinStore.users["me"] ? larkinStore.users["me"].name : "Unknown",
+    role: larkinStore.users["me"] ? larkinStore.users["me"].role : null
   }
 }
 
