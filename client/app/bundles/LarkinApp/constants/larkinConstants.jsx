@@ -9,7 +9,10 @@ const actionTypes = mirrorCreator([
 
   'AUTH_LOGIN_OK',
   'AUTH_LOGIN_ERR',
-  'AUTH_LOGOUT'
+  'AUTH_LOGOUT',
+
+  'API_LOAD_USER',
+  'API_ERROR'
 ]);
 
 // actionTypes = {HELLO_WORLD_NAME_UPDATE: "HELLO_WORLD_NAME_UPDATE"}

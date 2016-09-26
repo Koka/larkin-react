@@ -1,5 +1,5 @@
 import actionTypes from '../constants/larkinConstants';
-import { getAuthToken } from '../api/api';
+import { getAuthToken, getUser } from '../api/api';
 import { push } from 'react-router-redux';
 
 const jwtStorageKey = 'larkinJWTToken';
@@ -18,6 +18,29 @@ export function setPassword(value) {
   };
 }
 
+export function loadUser(id) {
+  return (dispatch, getState) => {
+    const { token } = getState().larkinStore.auth;
+    getUser(token, id).then(
+      user => {
+        dispatch({ type: actionTypes.API_LOAD_USER, payload: {
+            id: user.user.id,
+            user: user.user
+          }
+        });
+        if (id !== user.user.id) {
+          dispatch({ type: actionTypes.API_LOAD_USER, payload: {
+              id: id,
+              user: user.user
+            }
+          });
+        }
+      },
+      err => dispatch({ type: actionTypes.API_ERROR, payload: err })
+    );
+  };
+}
+
 export function doLogin() {
   return (dispatch, getState) => {
     const { login, password } = getState().larkinStore.auth;
@@ -25,9 +48,12 @@ export function doLogin() {
       token => {
         sessionStorage.setItem(jwtStorageKey, token);
         dispatch({ type: actionTypes.AUTH_LOGIN_OK, payload: token });
+        return token;
       },
       err => dispatch({ type: actionTypes.AUTH_LOGIN_ERR, payload: err })
-    ).then(() => dispatch(push('/app/delivery')));
+    )
+    .then(() => dispatch(loadUser('me')))
+    .then(() => dispatch(push('/app/delivery')));
   };
 }
 
@@ -42,6 +68,7 @@ export function loadAuthToken() {
     const token = sessionStorage.getItem(jwtStorageKey);
     if (token) {
       dispatch({ type: actionTypes.AUTH_LOGIN_OK, payload: token });
+      dispatch(loadUser('me'));
     }
   };
 }

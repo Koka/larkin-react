@@ -6,7 +6,9 @@ export const initialState = {
     password: "",
     error: "",
     token: null
-  }
+  },
+
+  users: { }
 };
 
 export default function larkinReducer(state = initialState, action) {
@@ -32,6 +34,15 @@ export default function larkinReducer(state = initialState, action) {
       return Object.assign({}, state, {
         auth: Object.assign({}, state.auth, {token: null})
       });
+    case actionTypes.API_LOAD_USER:
+      return Object.assign({}, state, {
+        users: Object.assign({}, state.users, {
+          [payload.id]: payload.user
+        })
+      });
+    case actionTypes.API_ERROR:
+      console.error("Failed to do API call", state.payload);
+      return state;
     default:
       return state;
   }
